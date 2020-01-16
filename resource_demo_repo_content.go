@@ -104,15 +104,14 @@ func CreateOauth2Client(token string) (*http.Client, error) {
 	return tc, nil
 }
 
-// Retrieve file, append configuration, and prepare new commit
+// Retrieve branch reference and write (commit) file
 func UpdateFile(client *github.Client, org string, repo string, branch string, file_path string, file_content string) error {
-	// Retrieve configuration file contents
+	// Retrieve branch reference
 	baseRef, _, err := client.Git.GetRef(context.Background(), org, repo, REFS_PREFIX+branch)
 	if err != nil {
 		return err
 	}
 
-	// Re-encode file with appended configuration
 	encodedContent := []byte(file_content)
 	commitMessage := COMMIT_MESSAGE
 
