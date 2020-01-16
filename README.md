@@ -1,6 +1,12 @@
 # terraform-provider-demo
 
-Demonstrating a custom Terraform provider.
+Demonstrating a custom Terraform provider that creates/updates file content inside a GitHub repository.
+
+## Disclaimer
+
+**This custom provider is not recommended for production environments.**
+
+I have written this provider for demonstration purposes, there is still room for improvement.
 
 ## Environment Details
 
@@ -57,3 +63,25 @@ go build -o terraform-provider-demo
 
 ### Authentication
 
+As opposed to exposing your GitHup Personal Access Token inside your Terraform modules, you can export it as an environment variable:
+
+```bash
+export GITHUB_TOKEN="<GITHUB_TOKEN>"
+```
+
+### Terraform Usage
+
+This directory contains a simple `main.tf` that defines the custom resource, `demo_repo_content`, to be created on `apply`. Modify the `main.tf` to configure your GitHub repository details.
+
+Initialize the custom provider (and any other providers) to be used here, then run `apply`:
+
+```bash
+terraform init
+terraform apply
+```
+
+You will then be prompted to review and confirm that `demo_repo_content.main` will be created.
+
+If everything succeeds, the file with the content defined in your Terraform module(s) will be created/updated in your desired GitHub repository and branch.
+
+Refer to [Installing Plugins](https://www.terraform.io/docs/plugins/basics.html#installing-plugins) for configuring this custom provider.
