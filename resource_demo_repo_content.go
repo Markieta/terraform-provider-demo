@@ -16,7 +16,7 @@ func resourceRepoContent() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceRepoContentCreate,
 		Read:   resourceRepoContentRead,
-		// Update: resourceRepoContentUpdate,
+		Update: resourceRepoContentUpdate,
 		Delete: resourceRepoContentDelete,
 
 		Schema: map[string]*schema.Schema{
@@ -63,11 +63,9 @@ func resourceRepoContentRead(d *schema.ResourceData, m interface{}) error {
 	return nil
 }
 
-/*
 func resourceRepoContentUpdate(d *schema.ResourceData, m interface{}) error {
 	return resourceRepoContentRead(d, m)
 }
-*/
 
 func resourceRepoContentDelete(d *schema.ResourceData, m interface{}) error {
 	return nil
